@@ -49,13 +49,18 @@
          */
         public function generate() : string
         {
-            $csv = implode(';', $this->columns);
+            $csv = implode(';', $this->columns).PHP_EOL;
             for($x=1; $x<=$this->numRows; $x++){
-                $price = $this->faker->randomFloat(2);
+                $price = $this->faker->randomFloat(2, 25, 9999);
                 $purchagePercentage = $this->faker->numberBetween(0.3, 0.6);
-                $percentage = $this->faker->randomFloat(2);
                 $flagDiscount = $this->faker->numberBetween(0, 1); //if returns 1 will use the value as already calculated percentage, if returns 0 will use with % that indicates that have do calculate the value
-                $csv .= $x.';'. $this->faker->productName. ';'. $price. ';'. ($price * $purchagePercentage). ';'. $percentage. ($flagDiscount ? '' : '%');
+                $init = $price * 0.01;
+                $end = $price * 0.3;
+                $percentage = $this->faker->randomFloat(2, $init, $end);
+                if(!$flagDiscount){
+                    $percentage = $this->faker->randomFloat(2, 0, 30). '%';
+                }
+                $csv .= $x.';'. $this->faker->productName. ';'. $price. ';'. ($price * $purchagePercentage). ';'. $percentage. PHP_EOL;
             }
 
             return $csv;
@@ -73,8 +78,12 @@
             if(!is_writable(dirname($this->csvpath)))
                 throw new \Exception('Cannot save the file into path desired. Has no permission');
 
+            if(file_exists($this->csvpath)){
+                unlink($this->csvpath);
+            }
+
             $csv = $this->generate();
-            file_put_contents($this->csvpath, $csv);
+            file_put_contents($this->csvpath, $csv, FILE_APPEND);
         }
     }
 ?>
