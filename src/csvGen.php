@@ -52,7 +52,8 @@
             $csv = implode(';', $this->columns).PHP_EOL;
             for($x=1; $x<=$this->numRows; $x++){
                 $price = $this->faker->randomFloat(2, 25, 9999);
-                $purchagePercentage = $this->faker->numberBetween(0.3, 0.6);
+                $purchagePercentage = $this->faker->numberBetween(30, 60);
+                $purchagePercentage = $purchagePercentage / 100;
                 $flagDiscount = $this->faker->numberBetween(0, 1); //if returns 1 will use the value as already calculated percentage, if returns 0 will use with % that indicates that have do calculate the value
                 $init = $price * 0.01;
                 $end = $price * 0.3;
