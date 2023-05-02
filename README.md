@@ -33,4 +33,35 @@ I decided to improve this challenge creating a system that generates this files 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 I will explain how to use here:
+
+## Generate is quitly simple
+### Saving directly to a file
+```
+<?php
+    //lets generate a csv with 1000 lines
+    require_once __DIR__.'/../src/csvGen.php';
+    use challenge1\csvGen;
+    
+    //the path is current directory added with csvs folder and the file name test1.csv, with a 1000 lines of fake products
+    $gen = new csvGen(__DIR__.'/csvs/test1.csv', 1000);
+    $gen->generateAndSave();
+?>
+```
+
+### Returning as string
+```
+<?php
+    //lets generate a csv with 1000 lines
+    require_once __DIR__.'/../src/csvGen.php';
+    use challenge1\csvGen;
+    
+    //the path is current directory added with csvs folder and the file name test1.csv, with a 1000 lines of fake products
+    $gen = new csvGen(__DIR__.'/csvs/test1.csv', 1000);
+    $str = $gen->generate();
+?>
+```
+
+## Read the file
+You can see in the test/readCsv.php the example.
+[Teste file](https://github.com/andmarruda/csvchallenge/blob/main/test/readCsv.php)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
