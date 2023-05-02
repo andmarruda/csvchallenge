@@ -62,6 +62,7 @@ I will explain how to use here:
 ```
 
 ## Read the file
+
 You can see in the test/readCsv.php the example.
-[Teste file](https://github.com/andmarruda/csvchallenge/blob/main/test/readCsv.php)
+[Test file](https://github.com/andmarruda/csvchallenge/blob/main/test/readCsv.php)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
